@@ -1,0 +1,110 @@
+---
+// Import CSS classes
+import '../style/general.css';
+
+// Import components
+import Button from '../components/Button.astro';
+import Badge from '../components/Badge.astro';
+import SocialButton from '../components/SocialButton.astro';
+import Project from '../components/Project.astro';
+
+// Import astro components
+import { Image } from 'astro:assets';
+import { getCollection, getEntry } from 'astro:content';
+
+// Import profile
+const profile = await getEntry('profiles', '2024-02-09-braddotwav');
+
+// Import projects
+const projects = await getCollection('projects');
+---
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>@{profile.data.title}</title>
+	</head>
+	<body>
+		<!-- Sticky navigation -->
+		<nav class="fixed right-1 p-5 bg-transparent z-10">
+			<div class="block md:hidden">
+				<Button title='Projects' href='#projectList'></Button>
+			</div>
+			{profile.data.resumeLink ?
+				<div class="hidden md:block">
+				<Button title='Resume' href={profile.data.resumeLink} newTab={true}></Button>
+				</div>
+			: ''}
+
+		</nav>
+
+		<main>
+			<div class="md:h-screen flex flex-col-reverse md:flex-row">
+				<!-- Projects section -->
+				<section id="projectList" class="projects flex flex-col flex-wrap gap-y-12 overflow-y-scroll p-9 items-start h-screen md:w-full bg-primary-700">
+					<!-- Software projects -->
+					{projects.map(entry => (
+						<Project project={entry}/>
+					))}
+				</section>
+
+				<!-- Profile section -->
+				<section class="flex flex-col justify-between p-6 items-center h-screen md:w-full md:h-full bg-primary-800">
+					<div class="flex flex-col mt-auto mb-auto items-center gap-6">
+						<Image src={profile.data.avatar} alt={"Profile avatar"} width={144} height={144} class:list={"rounded-[58px]"}></Image>
+						<!-- Profile intro -->
+						<div class="flex flex-col items-center gap-2 text-white">
+							<h2 class="font-semibold text-3xl">{profile.data.title}</h2>
+							<p>{profile.data.description}</p>
+						</div>
+						<!-- Profile toolset -->
+						<div class="flex flex-col w-fit bg-primary-600/20 rounded-xl p-4 gap-3">
+							<h3 class="font-mono self-center text-primary-400">COMMON TOOLSET:</h3>
+							<!-- Toolset badges -->
+							<div class="flex flex-row flex-wrap gap-3">
+								{profile.data.toolset.map((toolset: string) => (
+									<Badge>
+										<p>{toolset.toUpperCase()}</p>
+									</Badge>
+								))}
+							</div>
+						</div>
+					</div>
+
+					<!-- Profile social -->
+					<div class="flex flex-col gap-2">
+						<h3 class="font-mono self-center text-primary-400">SOCIALS:</h3>
+						<div class="flex flex-row gap-6">
+							<!-- Social icons -->
+							{profile.data.socials ? profile.data.socials.map((social: string) => (
+								<SocialButton href={social}/>
+							)) : ''}
+						</div>
+					</div>
+
+				</section>
+			</div>
+		</main>
+	</body>
+</html>
+
+<!-- Index page styleing -->
+<style>
+	.projects::-webkit-scrollbar{
+		width: 0.6rem;
+	}
+
+	.projects::-webkit-scrollbar-thumb{
+		background-color: #414141;
+		border-radius: 6px;
+		border: solid 5px transparent;
+	}
+
+	.projects::-webkit-scrollbar-track{
+		background-color: transparent;
+		border: solid 5px transparent;
+	}
+</style>

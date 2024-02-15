@@ -1,0 +1,142 @@
+{
+  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.framework.id": "astro",
+  "frontMatter.preview.host": "http://localhost:4321",
+  "frontMatter.content.publicFolder": "public",
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "profiles",
+      "path": "[[workspace]]/src/content/profiles",
+      "contentTypes": [
+        "profile"
+      ]
+    },
+    {
+      "title": "projects",
+      "path": "[[workspace]]/src/content/projects",
+      "contentTypes": [
+        "project"
+      ]
+    }
+  ],
+  "frontMatter.taxonomy.contentTypes": [
+    {
+      "name": "profile",
+      "pageBundle": false,
+      "clearEmpty": true,
+      "fields": [
+        {
+          "title": "Title",
+          "name": "title",
+          "type": "string",
+          "description": "Profile username handle",
+          "required": true
+        },
+        {
+          "title": "Avatar",
+          "name": "avatar",
+          "type": "image",
+          "description": "Display a profile image",
+          "required": true
+        },
+        {
+          "title": "Description",
+          "name": "description",
+          "type": "string",
+          "description": "Enter a breif summary of what you do",
+          "required": true
+        },
+        {
+          "title": "Toolset",
+          "name": "toolset",
+          "type": "list",
+          "description": "Enter a list of your commonly used tools",
+          "required": true
+        },
+        {
+          "title": "Socials",
+          "name": "socials",
+          "type": "list",
+          "description": "Display your socials",
+          "required": false
+        },
+        {
+          "title": "Resume",
+          "name": "resumeLink",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "project",
+      "pageBundle": false,
+      "clearEmpty": true,
+      "fields": [
+        {
+          "title": "Title",
+          "name": "title",
+          "type": "string",
+          "default": "Project title",
+          "description": "Enter the project's title",
+          "required": true
+        },
+        {
+          "title": "Description",
+          "name": "description",
+          "type": "string",
+          "default": "Project description",
+          "description": "Write a brief summary of what the project is about or what it does",
+          "required": true
+        },
+        {
+          "title": "Category",
+          "name": "category",
+          "type": "choice",
+          "description": "What category does this project come under",
+          "choices": [
+            "software",
+            "audio",
+            "other"
+          ],
+          "required": true
+        },
+        {
+          "title": "Image",
+          "name": "image",
+          "description": "Provide a screenshot of the project",
+          "type": "image",
+          "required": true
+        },
+        {
+          "title": "Created With",
+          "name": "createdWith",
+          "description": "What was the project created with",
+          "type": "list",
+          "required": true
+        },
+        {
+          "title": "Link",
+          "name": "links",
+          "type": "list",
+          "description": "Provide any links connected to this project",
+          "required": false
+        },
+        {
+          "title": "Start Date",
+          "name": "startDate",
+          "description": "When was the project created",
+          "type": "datetime",
+          "dateFormat": "MMMM Y"
+        },
+        {
+          "title": "End Date",
+          "name": "releaseDate",
+          "description": "When was the project released",
+          "type": "datetime",
+          "dateFormat": "MMMM Y"
+        }
+      ]
+    }
+  ]
+}

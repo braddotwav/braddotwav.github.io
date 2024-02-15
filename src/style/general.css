@@ -1,0 +1,15 @@
+/* Add font faces */
+@font-face {
+    font-family: "Onest";
+    src: url(../fonts/Onest.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Jetbrains";
+    src: url(../fonts/JetBrainsMono.ttf) format("truetype");
+}
+
+/* Make scroll behavior smooth */
+html {
+    scroll-behavior: smooth;
+}

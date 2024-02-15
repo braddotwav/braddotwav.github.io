@@ -1,0 +1,35 @@
+---
+// Import astro icon component
+import { Icon } from 'astro-icon/components';
+
+interface Props{
+    href: string
+    size?: number
+}
+
+const { href, size = 32 } = Astro.props;
+
+// Define a dictionary to store URL to icon string mappings
+const urlIconMap: { [key: string]: string } = {
+    'github.com': 'bi:github',
+    'twitter.com': 'bi:twitter-x',
+    'spotify.com': 'bi:spotify',
+    'facebook.com': 'bi:facebook',
+    'soundcloud.com': 'bi:soundwave',
+};
+
+// Function to get the relevant icon string from a URL
+function getIconStringFromUrl(url: string) {
+    // Iterate through each URL pattern in the map
+    for (const [pattern, iconString] of Object.entries(urlIconMap)) {
+        if (url.includes(pattern)) {
+            return iconString;
+        }
+    }
+    // If no matching pattern is found, return default icon string
+    return 'bi:link-45deg';
+}
+---
+<a aria-label="social" href={href}>
+    <Icon name={getIconStringFromUrl(href)} size={size} class:list={"text-primary-400 hover:text-accent-400"}/>
+</a>
