@@ -1,0 +1,14 @@
+---
+interface Props{
+    href: string,
+    newTab?: boolean,
+}
+
+const { href, newTab = false} = Astro.props;
+
+// Create target type string
+const target:string = newTab ? '_blank' : '_self';
+---
+<a aria-label="link" href={href} target={target}>
+<slot/>
+</a>
