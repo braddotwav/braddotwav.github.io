@@ -1,6 +1,5 @@
 ---
 // Import astro icon component
-import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import SocialButton from './SocialButton.astro';
@@ -53,7 +52,7 @@ const projectTools:string = project.data.createdWith.join(', ').toString();
         <div class="hidden lg:block">
             <div class="projectLinks flex flex-row gap-8 items-center h-full justify-center opacity-0 transition-all duration-300">
                 {project.data.links ? project.data.links.map((link: string) => (
-                    <SocialButton href={link} size={64} class:list={"text-primary-400 hover:text-accent-400"}/>
+                    <SocialButton href={link} size={64} newTab={true} class:list={"text-primary-400 hover:text-accent-400"}/>
                 )) : ''}
             </div>            
         </div>

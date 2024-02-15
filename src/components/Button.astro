@@ -1,17 +1,16 @@
 ---
+import Link from './Link.astro'
+
 interface Props{
     title?: string,
     href: string,
-    newTab?: boolean,
 }
 
-const { title = "Button title", href, newTab = false } = Astro.props;
+const { title = "Button title", href } = Astro.props;
 
-// Create target type string
-const targetType:string = newTab ? '_blank' : '_self';
 ---
-<a href={href} target={targetType}>
+<Link href={href}>
     <button tabindex="-1" class="bg-accent-400 text-white py-2 px-5 rounded-md">
         {title}
     </button>
-</a>
+</Link>

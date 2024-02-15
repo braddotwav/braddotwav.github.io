@@ -1,13 +1,15 @@
 ---
 // Import astro icon component
 import { Icon } from 'astro-icon/components';
+import Link from './Link.astro';
 
 interface Props{
     href: string
     size?: number
+    newTab?: boolean
 }
 
-const { href, size = 32 } = Astro.props;
+const { href, size = 32, newTab = false } = Astro.props;
 
 // Define a dictionary to store URL to icon string mappings
 const urlIconMap: { [key: string]: string } = {
@@ -30,6 +32,6 @@ function getIconStringFromUrl(url: string) {
     return 'bi:link-45deg';
 }
 ---
-<a aria-label="social" href={href}>
+<Link href={href} newTab={newTab}>
     <Icon name={getIconStringFromUrl(href)} size={size} class:list={"text-primary-400 hover:text-accent-400"}/>
-</a>
+</Link>
