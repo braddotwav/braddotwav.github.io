@@ -35,7 +35,7 @@ const projects = await getCollection('projects');
 			</div>
 			{profile.data.resumeLink ?
 				<div class="hidden md:block">
-				<Button title='Resume' href={profile.data.resumeLink} newTab={true}></Button>
+				<Button title='Resume' href={profile.data.resumeLink}></Button>
 				</div>
 			: ''}
 
