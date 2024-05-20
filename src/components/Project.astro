@@ -54,10 +54,12 @@ const projectTools:string = project.data.createdWith.join(', ').toString();
                 {project.data.links ? project.data.links.map((link: string) => (
                     <SocialButton href={link} size={64} newTab={true} class:list={"text-primary-400 hover:text-accent-400"}/>
                 )) : ''}
-            </div>            
+            </div>
         </div>
         <!-- Project image -->
-        <Image src={project.data.image} alt="project" width={1} height={1} class:list={"projectImage rounded-xl hidden lg:block absolute right-1 bottom-1 w-3/5 translate-y-2/4 transition-all -z-10"}/>
+        <div class="hidden lg:block absolute w-3/5 h-4/5 right-1 bottom-1 -z-10 translate-y-1 translate-x-2">
+            <Image src={project.data.image} alt="project" width={1} height={1} class:list={"projectImage transition-all duration-300 w-full h-full object-cover object-left-top"}/>
+        </div>
     </div>
 </div>
 
@@ -73,6 +75,7 @@ const projectTools:string = project.data.createdWith.join(', ').toString();
 
 .projectContainer:hover .projectImage{
     filter: blur(12px);
+    opacity: 0.3;
 }
 
 .projectContainer:hover .projectLinks{

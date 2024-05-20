@@ -31,7 +31,7 @@ const projects = await getCollection('projects');
 		<!-- Sticky navigation -->
 		<nav class="fixed right-1 p-5 bg-transparent z-10">
 			<div class="block md:hidden">
-				<Button title='Projects' href='#projectList'></Button>
+				<Button title='Projects' href='#projects'></Button>
 			</div>
 			{profile.data.resumeLink ?
 				<div class="hidden md:block">
@@ -44,7 +44,7 @@ const projects = await getCollection('projects');
 		<main>
 			<div class="md:h-screen flex flex-col-reverse md:flex-row">
 				<!-- Projects section -->
-				<section id="projectList" class="projects flex flex-col flex-wrap gap-y-12 overflow-y-scroll p-9 items-start h-screen md:w-full bg-primary-700">
+				<section id="projects" class="projects flex flex-col flex-wrap gap-y-12 overflow-y-scroll p-9 items-start h-screen md:w-full bg-primary-700">
 					<!-- Software projects -->
 					{projects.map(entry => (
 						<Project project={entry}/>

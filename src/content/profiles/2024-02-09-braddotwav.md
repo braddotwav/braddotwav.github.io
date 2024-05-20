@@ -1,14 +1,15 @@
 ---
 title: braddotwav
 type: profile
-description: A programmer & audio engineer from United Kingdom.
+description: Programmer & Music Maker
 toolset:
     - C#
     - Git
     - Unity
-    - HTML & CSS
     - Javascript
     - Ableton
+    - Html
+    - Css
 avatar: /avatars/gizmopp.jpg
 socials:
     - https://github.com/braddotwav
