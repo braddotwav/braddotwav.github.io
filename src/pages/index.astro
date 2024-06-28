@@ -44,7 +44,7 @@ const projects = await getCollection('projects');
 		<main>
 			<div class="md:h-screen flex flex-col-reverse md:flex-row">
 				<!-- Projects section -->
-				<section id="projects" class="projects flex flex-col flex-wrap gap-y-12 overflow-y-scroll p-9 items-start h-screen md:w-full bg-primary-700">
+				<section id="projects" class="projects flex flex-row flex-wrap gap-y-12 overflow-y-scroll p-9 items-start h-screen md:w-full bg-primary-700">
 					<!-- Software projects -->
 					{projects.map(entry => (
 						<Project project={entry}/>
