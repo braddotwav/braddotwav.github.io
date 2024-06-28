@@ -121,20 +121,6 @@
           "type": "list",
           "description": "Provide any links connected to this project",
           "required": false
-        },
-        {
-          "title": "Start Date",
-          "name": "startDate",
-          "description": "When was the project created",
-          "type": "datetime",
-          "dateFormat": "MMMM Y"
-        },
-        {
-          "title": "End Date",
-          "name": "releaseDate",
-          "description": "When was the project released",
-          "type": "datetime",
-          "dateFormat": "MMMM Y"
         }
       ]
     }

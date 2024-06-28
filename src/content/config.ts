@@ -23,8 +23,6 @@ const projectCollection = defineCollection({
         image: image().required(),
         createdWith: z.array(z.string()),
         links: z.array(z.string().url()),
-        startDate: z.date(),
-        releaseDate: z.date()
     })
 });
 

@@ -6,8 +6,6 @@ category: software
 createdWith:
     - C#
     - WPF
-startDate: May 2024
-releaseDate: May 2024
 links:
     - https://github.com/braddotwav/HammerTime
 image: /screenshots/hammertime_screenshot.jpg
