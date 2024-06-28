@@ -44,7 +44,7 @@ const projects = await getCollection('projects');
 		<main>
 			<div class="md:h-screen flex flex-col-reverse md:flex-row">
 				<!-- Projects section -->
-				<section id="projects" class="projects flex flex-row flex-wrap gap-y-12 overflow-y-scroll p-9 items-start h-screen md:w-full bg-primary-700">
+				<section id="projects" class="projects flex flex-row flex-wrap gap-y-12 overflow-y-scroll p-9 items-start h-screen md:w-full bg-primary-900">
 					<!-- Software projects -->
 					{projects.map(entry => (
 						<Project project={entry}/>
@@ -52,7 +52,7 @@ const projects = await getCollection('projects');
 				</section>
 
 				<!-- Profile section -->
-				<section class="flex flex-col justify-between p-6 items-center h-screen md:w-full md:h-full bg-primary-800">
+				<section class="flex flex-col justify-between p-6 items-center h-screen md:w-full md:h-full bg-primary-1000">
 					<div class="flex flex-col mt-auto mb-auto items-center gap-6">
 						<Image src={profile.data.avatar} alt={"Profile avatar"} width={144} height={144} class:list={"rounded-[58px]"}></Image>
 						<!-- Profile intro -->
@@ -61,8 +61,8 @@ const projects = await getCollection('projects');
 							<p>{profile.data.description}</p>
 						</div>
 						<!-- Profile toolset -->
-						<div class="flex flex-col w-fit bg-primary-600/20 rounded-xl p-4 gap-3">
-							<h3 class="font-mono self-center text-primary-400">COMMON TOOLSET:</h3>
+						<div class="flex flex-col w-fit bg-primary-800/20 rounded-xl p-4 gap-3">
+							<h3 class="font-mono self-center text-primary-600">COMMON TOOLSET:</h3>
 							<!-- Toolset badges -->
 							<div class="flex flex-row flex-wrap gap-3">
 								{profile.data.toolset.map((toolset: string) => (
@@ -76,7 +76,7 @@ const projects = await getCollection('projects');
 
 					<!-- Profile social -->
 					<div class="flex flex-col gap-2">
-						<h3 class="font-mono self-center text-primary-400">SOCIALS:</h3>
+						<h3 class="font-mono self-center text-primary-600">SOCIALS:</h3>
 						<div class="flex flex-row gap-6">
 							<!-- Social icons -->
 							{profile.data.socials ? profile.data.socials.map((social: string) => (

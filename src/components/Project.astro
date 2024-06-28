@@ -12,22 +12,22 @@ interface Props{
 const { project } = Astro.props;
 
 // Get project tools as string
-const projectTools:string = project.data.createdWith.join(', ').toString();
+const projectTools:string = project.data.createdWith.join(', ').toUpperCase();
 ---
 <!-- Project component start -->
-<div class="w-full overflow-hidden bg-primary-800 border-primary-600 hover:border-primary-400 border-solid border-4 rounded-[64px] transition-all cursor-default">
+<div class="w-full overflow-hidden bg-primary-1000 border-primary-800 hover:border-primary-600 border-solid border-4 rounded-[64px] transition-all cursor-default">
     <div class="projectContainer relative grid grid-rows-1 grid-cols-1 lg:grid-cols-2 grid-flow-col gap-4 p-10 z-10">
         <div class="relative flex items-center h-60">
             <div class="absolute max-w-md project transition-opacity duration-200">
                 <!-- Project details-->
-                <div class="flex flex-col gap-6 text-white">
+                <div class="flex flex-col gap-6 text-white font-mono text-sm">
                     <!-- Project title -->
                     <div class="flex flex-col gap-1">
-                        <h3 class="font-mono text-primary-400 text-sm">PROJECT TITLE:</h3>
-                        <h2 class="font-semibold text-3xl">{project.data.title}</h2>
+                        <h3 class="text-primary-400">PROJECT TITLE:</h3>
+                        <h2 class="font-sans font-semibold text-3xl">{project.data.title}</h2>
                     </div>
                     <!-- Project type -->
-                    <h3 class="font-mono text-primary-400 text-sm">PROJECT TYPE: <span class="text-accent-400">{project.data.category.toString()}</span></h3>
+                    <h3 class="text-primary-400">PROJECT TYPE: <span class="text-accent-400">{project.data.category}</span></h3>
                 </div>
             </div>
 
@@ -52,7 +52,7 @@ const projectTools:string = project.data.createdWith.join(', ').toString();
         <div class="hidden lg:block">
             <div class="projectLinks flex flex-row gap-8 items-center h-full justify-center opacity-0 transition-all duration-200">
                 {project.data.links ? project.data.links.map((link: string) => (
-                    <SocialButton href={link} size={64} newTab={true} class:list={"text-primary-400 hover:text-accent-400"}/>
+                    <SocialButton href={link} size={64} newTab={true}/>
                 )) : ''}
             </div>
         </div>
