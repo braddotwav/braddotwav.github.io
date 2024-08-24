@@ -10,8 +10,8 @@ toolset:
     - Ableton
     - Html
     - Css
-avatar: /avatars/gizmopp.jpg
 socials:
     - https://github.com/braddotwav
     - https://twitter.com/braddotwav
+avatar: /avatars/gizmo_avatar.webp
 ---

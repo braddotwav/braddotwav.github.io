@@ -9,7 +9,7 @@ import SocialButton from '../components/SocialButton.astro';
 import Project from '../components/Project.astro';
 
 // Import astro components
-import { Image } from 'astro:assets';
+import { getImage, Image } from 'astro:assets';
 import { getCollection, getEntry } from 'astro:content';
 
 // Import profile
@@ -54,15 +54,15 @@ const projects = await getCollection('projects');
 				<!-- Profile section -->
 				<section class="flex flex-col justify-between p-6 items-center h-screen md:w-full md:h-full bg-primary-1000">
 					<div class="flex flex-col mt-auto mb-auto items-center gap-6">
-						<Image src={profile.data.avatar} alt={"Profile avatar"} width={144} height={144} class:list={"rounded-[58px]"}></Image>
+						<Image src={profile.data.avatar} alt={"avatar"} width={144} height={144} class:list={"rounded-[58px]"}></Image>
 						<!-- Profile intro -->
 						<div class="flex flex-col items-center gap-2 text-white">
 							<h2 class="font-semibold text-3xl">{profile.data.title}</h2>
 							<p>{profile.data.description}</p>
 						</div>
 						<!-- Profile toolset -->
-						<div class="flex flex-col w-fit bg-primary-800/20 rounded-xl p-4 gap-3">
-							<h3 class="font-mono self-center text-primary-600">COMMON TOOLSET:</h3>
+						<div class="flex flex-col w-fit rounded-xl p-4 gap-3">
+							<h3 class="font-mono self-center text-primary-400">COMMON TOOLSET:</h3>
 							<!-- Toolset badges -->
 							<div class="flex flex-row flex-wrap gap-3">
 								{profile.data.toolset.map((toolset: string) => (
@@ -76,7 +76,7 @@ const projects = await getCollection('projects');
 
 					<!-- Profile social -->
 					<div class="flex flex-col gap-2">
-						<h3 class="font-mono self-center text-primary-600">SOCIALS:</h3>
+						<h3 class="font-mono self-center text-primary-400">SOCIALS:</h3>
 						<div class="flex flex-row gap-6">
 							<!-- Social icons -->
 							{profile.data.socials ? profile.data.socials.map((social: string) => (

@@ -8,5 +8,5 @@ createdWith:
     - WPF
 links:
     - https://github.com/braddotwav/HammerTime
-image: /screenshots/hammertime_screenshot.png
+image: /screenshots/hammertime_screenshot.webp
 ---
