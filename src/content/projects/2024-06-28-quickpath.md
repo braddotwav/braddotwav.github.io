@@ -1,7 +1,7 @@
 ---
 title: Quick Path
 type: project
-description: QuickPath is a editor tool that allows you to set up directories as menu items for quick and easy access to important folders.
+description: QuickPath is a Unity editor tool that adds directories as menu items for quick access to important folders.
 category: software
 createdWith:
     - C#
