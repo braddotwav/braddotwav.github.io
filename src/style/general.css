@@ -2,11 +2,14 @@
 @font-face {
     font-family: "Onest";
     src: url(../fonts/Onest.ttf) format("truetype");
+    font-display: swap;
+
 }
 
 @font-face {
     font-family: "Jetbrains";
     src: url(../fonts/JetBrainsMono.ttf) format("truetype");
+    font-display: swap;
 }
 
 /* Make scroll behavior smooth */
