@@ -23,11 +23,11 @@ const projectTools:string = project.data.createdWith.join(', ').toUpperCase();
                 <div class="flex flex-col gap-6 text-white font-mono text-sm">
                     <!-- Project title -->
                     <div class="flex flex-col gap-1">
-                        <h3 class="text-primary-400">PROJECT TITLE:</h3>
+                        <h3 class="text-primary-400">TITLE:</h3>
                         <h2 class="font-sans font-semibold text-3xl">{project.data.title}</h2>
                     </div>
                     <!-- Project type -->
-                    <h3 class="text-primary-400">PROJECT TYPE: <span class="text-accent-400">{project.data.category}</span></h3>
+                    <h3 class="text-primary-400">TYPE: <span class="text-accent-400">{project.data.category}</span></h3>
                 </div>
             </div>
 
@@ -36,7 +36,7 @@ const projectTools:string = project.data.createdWith.join(', ').toUpperCase();
                 <div class="flex flex-col gap-6 text-white">
                     <!-- Project summary -->
                     <div class="flex flex-col gap-1">
-                        <h3 class="font-mono text-primary-400 text-sm">PROJECT SUMMARY:</h3>
+                        <h3 class="font-mono text-primary-400 text-sm">SUMMARY:</h3>
                         <p>{project.data.description}</p>
                     </div>
                     <!-- Project tools used -->
