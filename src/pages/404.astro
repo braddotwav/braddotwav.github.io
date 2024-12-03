@@ -5,19 +5,20 @@ import '../style/general.css';
 ---
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>404</title>
-</head>
-<body>
-    <main>
-        <section class="bg-primary-800 text-white h-screen flex flex-col gap-4 justify-center items-center">
+
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>404</title>
+    </head>
+
+    <body>
+        <main class="text-white h-screen flex flex-col gap-4 justify-center items-center">
             <h1 class="text-5xl">Page not found</h1>
             <a href="../"><p class="underline-offset-4 underline hover:text-accent-400 transition-all duration-300">Return to home</p></a>
-        </section>
-    </main>
-</body>
+        </main>
+    </body>
+
 </html>
