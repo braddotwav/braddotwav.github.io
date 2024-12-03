@@ -2,7 +2,7 @@
 title: braddotwav
 type: profile
 description: Programmer & Music Maker
-toolset:
+tools:
     - C#
     - Git
     - Unity
