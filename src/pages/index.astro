@@ -6,13 +6,20 @@ import '../style/general.css'
 // Components
 import Button from '../components/Button.astro'
 import Badge from '../components/Badge.astro';
+import Project from '../components/Project.astro';
+import SocialButton from '../components/SocialButton.astro';
 
 // Astro Components
 import { Image } from 'astro:assets';
 import { getCollection, getEntry } from 'astro:content';
+import Link from '../components/Link.astro';
 
 // Import profile
 const profile = await getEntry('profiles', '2024-02-09-braddotwav');
+
+// Import projects
+const projects = await getCollection('projects');
+
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -26,48 +33,93 @@ const profile = await getEntry('profiles', '2024-02-09-braddotwav');
     </head>
     
     <body>
-        <!-- Profile Header -->
-        <div style="height: 60svh;">
-            
-            <!-- Navigation -->
-            <nav class="fixed right-1 p-5 z-10">
-                <Button title='Projects' href='#projects'/>
-                
-                {profile.data.resumeLink ?
-                    <div class="hidden md:block">
-                        <Button title='Resume' href={profile.data.resumeLink}></Button>
-                    </div>
-                : ''}
-            </nav>
-
-            <!-- Profile Content -->
-            <section class="h-full flex flex-col items-center justify-center gap-6">
-               
-                <!-- Picture -->
-                <Image src={profile.data.avatar} alt={"avatar"} width={144} height={144} class:list={"rounded-[99px]"}></Image>
-                
-                <!-- Intro -->
-                <div class="flex flex-col items-center gap-2 text-white">
-                    <h2 class="font-semibold text-3xl">{profile.data.title}</h2>
-                    <p>{profile.data.description}</p>
+        <main>
+            <!-- Profile Section -->
+            <section id="profile" class="h-screen">
+                <!-- Project Button -->
+                <div id="projectBtn" class="fixed right-1 p-5 z-10">
+                    <Button title='Projects' href='#projects'/>
                 </div>
+
+                <!-- Profile Content -->
+                <div class="h-full flex flex-col items-center justify-center gap-6">
+                    <!-- Picture -->
+                    <Image src={profile.data.avatar} alt={"avatar"} width={144} height={144} class:list={"rounded-[99px]"}></Image>
                     
-                <!-- Badges -->
-                <div class="flex flex-col items-center gap-2 w-fit p-4">
-                    <h3 class="font-mono self-center text-primary-400">COMMON TOOLSET:</h3>
-                    <div class="flex flex-row flex-wrap gap-3">
-                        {profile.data.toolset.map((toolset: string) => (
-                            <Badge>
-                                <p>{toolset.toUpperCase()}</p>
-                            </Badge>
-                        ))}
+                    <!-- Intro -->
+                    <div class="flex flex-col items-center gap-2 text-white">
+                        <h2 class="font-semibold text-3xl">{profile.data.title}</h2>
+                        <p class="text-primary-300">{profile.data.description}</p>
+                    </div>
+                        
+                    <!-- Tools -->
+                    <div class="flex flex-col items-center gap-2 w-fit p-4">
+                        <h3 class="font-mono self-center text-primary-300">TOOLSET:</h3>
+                        <div class="flex flex-row flex-wrap gap-3 mx-12">
+                            {profile.data.tools.map((toolset: string) => (
+                                <Badge>
+                                    <p>{toolset.toUpperCase()}</p>
+                                </Badge>
+                            ))}
+                        </div>
                     </div>
                 </div>
-
+            </section>
+            
+            <!-- Project Section -->
+            <section id="projects" class="container mx-auto">
+                <div class="flex flex-col gap-24 mb-24">
+                    {projects.map(entry => (
+						<Project project={entry}/>
+					))}
+                </div>
             </section>
 
-        </div>
-		
+            <!-- Footer -->
+            <footer class="bg-black text-white p-12">
+                <div class="container mx-auto flex flex-row justify-between">
+                    <!-- Back to top -->
+                    <Link href='#profile'>
+                        <h3 class="text-sm font-mono self-center text-primary-300 hover:text-accent-400">BACK TO TOP</h3>
+                    </Link>
+                    
+                    <!-- Socials -->
+                    <div class="flex flex-row gap-6 justify-end">
+                        <h3 class="text-sm font-mono self-center text-primary-300">SOCIALS:</h3>
+                        {profile.data.socials ? profile.data.socials.map((social: string) => (
+                            <SocialButton href={social}/>
+                        )) : ''}
+                    </div>
+                </div>
+            </footer>
+
+        </main>
     </body>
 
 </html>
+
+<script>
+const projectBtn = document.getElementById('projectBtn');
+const projectSection = document.getElementById('projects');
+
+function handleProjectScroll() {
+    if (!projectBtn || !projectSection) return;
+
+    const sectionTop = projectSection.offsetTop;
+    const scrollPosition = window.scrollY;
+
+    const distance = sectionTop - scrollPosition;
+    
+    if (distance <= 0) {
+        projectBtn.style.opacity = '0';
+        projectBtn.style.visibility = 'hidden';
+    }
+    else {
+        const opacity = distance / sectionTop;
+        projectBtn.style.opacity = opacity.toString();
+        projectBtn.style.visibility = 'visible';
+    }
+}
+
+window.addEventListener('scroll', handleProjectScroll)
+</script>
