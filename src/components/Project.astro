@@ -2,7 +2,7 @@
 // Import astro icon component
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import SocialButton from './SocialButton.astro';
+import Button from './Button.astro';
 
 // Create interface
 interface Props{
@@ -11,75 +11,62 @@ interface Props{
 
 const { project } = Astro.props;
 
-// Get project tools as string
-const projectTools:string = project.data.createdWith.join(', ').toUpperCase();
+// Combine all the tools into one string
+const tools:string = project.data.tools.join(', ').toUpperCase();
+const category:string = project.data.category.toUpperCase();
+
+// Function to parse a url to get its name
+function getWebsiteName(url: string): string {
+    // Create a URL object from the input string
+    const parsedUrl = new URL(url);
+
+    // Extract the hostname (the domain of the URL)
+    const hostname = parsedUrl.hostname;
+
+    // Remove "www." if it exists, and split the hostname to get the domain
+    const domain = hostname.replace(/^www\./, '').split('.')[0];
+
+    // Capitalize the first letter and return the result
+    return domain.charAt(0).toUpperCase() + domain.slice(1);
+}
+
+// Function to get the relevant icon string from a URL
+function getButtonTitleFromUrl(url: string): string {
+    const name:string = getWebsiteName(url);
+
+    return "View on " + name;
+}
+
 ---
-<!-- Project component start -->
-<div class="w-full overflow-hidden bg-primary-1000 border-primary-800 hover:border-primary-600 border-solid border-4 rounded-[64px] transition-all cursor-default">
-    <div class="projectContainer relative grid grid-rows-1 grid-cols-1 lg:grid-cols-2 grid-flow-col gap-4 p-10 z-10">
-        <div class="relative flex items-center h-60">
-            <div class="absolute max-w-md project transition-opacity duration-200">
-                <!-- Project details-->
-                <div class="flex flex-col gap-6 text-white font-mono text-sm">
-                    <!-- Project title -->
-                    <div class="flex flex-col gap-1">
-                        <h3 class="text-primary-400">TITLE:</h3>
-                        <h2 class="font-sans font-semibold text-3xl">{project.data.title}</h2>
-                    </div>
-                    <!-- Project type -->
-                    <h3 class="text-primary-400">TYPE: <span class="text-accent-400">{project.data.category}</span></h3>
+<!-- Project Content -->
+<div class="container mx-auto h-[25rem] grid grid-rows-1 grid-cols-1 lg:grid-cols-2 bg-primary-900/30 text-white">
+    <!-- Image Container-->
+    <div class="hidden lg:block relative">
+        <Image src={project.data.image} alt={project.data.title} width={1} height={1} class:list={"absolute w-full h-full object-cover object-top"}/>
+    </div>
+
+    <!-- Infomation Container -->
+    <div class="p-8">
+        <div class="relative w-full h-full">
+            <!-- Type & Tools -->
+            <div class="hidden lg:flex absolute right-0 gap-x-6 text-sm font-mono">
+                <p>TYPE: <span class="text-accent-300">{category}</span></p>
+                <p>TOOLS: <span class="text-accent-300">{tools}</span></p>
+            </div>
+      
+            <!-- Main -->
+            <div class="flex flex-col justify-center h-full gap-7">
+                <div class="flex flex-col gap-y-3">
+                    <h1 class="font-semibold text-4xl">{project.data.title}</h1>
+                    <p class="text-primary-300 text-lg">{project.data.description}</p>
+                </div>
+                
+                <div class="flex flex-row gap-6">
+                    {project.data.links ? project.data.links.map((link: string) => (
+                        <Button title={getButtonTitleFromUrl(link)} href={link}></Button>
+                    )) : ''}
                 </div>
             </div>
-
-            <!-- Project inspect -->
-            <div class="absolute max-w-md inspect opacity-0 transition-opacity duration-200">
-                <div class="flex flex-col gap-6 text-white">
-                    <!-- Project summary -->
-                    <div class="flex flex-col gap-1">
-                        <h3 class="font-mono text-primary-400 text-sm">SUMMARY:</h3>
-                        <p>{project.data.description}</p>
-                    </div>
-                    <!-- Project tools used -->
-                    <div class="flex flex-col gap-1">
-                        <h3 class="font-mono text-primary-400 text-sm">TOOLS USED:</h3>
-                        <p>{projectTools}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Project link -->
-        <div class="hidden lg:block">
-            <div class="projectLinks flex flex-row gap-8 items-center h-full justify-center opacity-0 transition-all duration-200">
-                {project.data.links ? project.data.links.map((link: string) => (
-                    <SocialButton href={link} size={64} newTab={true}/>
-                )) : ''}
-            </div>
-        </div>
-
-        <!-- Project image -->
-        <div class="hidden lg:block absolute w-3/5 h-4/5 right-1 bottom-1 -z-10 translate-y-1 translate-x-2">
-            <Image src={project.data.image} alt="project" width={1} height={1} class:list={"projectImage transition-all duration-100 w-full h-full object-cover object-left-top"}/>
         </div>
     </div>
 </div>
-
-<!-- Component style -->
-<style>
-.projectContainer:hover .project{
-    opacity: 0;
-}
-
-.projectContainer:hover .inspect{
-    opacity: 1;
-}
-
-.projectContainer:hover .projectImage{
-    filter: blur(14px);
-    opacity: 0.3;
-}
-
-.projectContainer:hover .projectLinks{
-    opacity: 1;
-}
-</style>
