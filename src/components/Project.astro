@@ -42,7 +42,7 @@ function getButtonTitleFromUrl(url: string): string {
 <div class="container mx-auto h-[25rem] grid grid-rows-1 grid-cols-1 lg:grid-cols-2 bg-primary-900/30 text-white">
     <!-- Image Container-->
     <div class="hidden lg:block relative">
-        <Image src={project.data.image} alt={project.data.title} width={1} height={1} class:list={"absolute w-full h-full object-cover object-top"}/>
+        <Image src={project.data.image} alt={project.data.name} width={1} height={1} class:list={"absolute w-full h-full object-cover object-top"}/>
     </div>
 
     <!-- Infomation Container -->
@@ -57,7 +57,7 @@ function getButtonTitleFromUrl(url: string): string {
             <!-- Main -->
             <div class="flex flex-col justify-center h-full gap-7">
                 <div class="flex flex-col gap-y-3">
-                    <h1 class="font-semibold text-4xl">{project.data.title}</h1>
+                    <h1 class="font-semibold text-4xl">{project.data.name}</h1>
                     <p class="text-primary-300 text-lg">{project.data.description}</p>
                 </div>
                 

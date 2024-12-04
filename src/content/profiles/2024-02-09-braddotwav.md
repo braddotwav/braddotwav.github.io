@@ -1,6 +1,7 @@
 ---
-title: braddotwav
-type: profile
+fmContentType: profile
+name: braddotwav
+avatar: /avatars/gizmo_avatar.webp
 description: Programmer & Music Maker
 tools:
     - C#
@@ -8,11 +9,8 @@ tools:
     - Unity
     - Javascript
     - Ableton
-    - Html
-    - Css
 socials:
     - https://github.com/braddotwav
-    - https://twitter.com/braddotwav
-    - https://www.youtube.com/@braddotwav
-avatar: /avatars/gizmo_avatar.webp
+    - https://x.com/braddotwav
+    - https://youtube.com/@braddotwav
 ---
