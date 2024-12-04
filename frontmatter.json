@@ -47,8 +47,8 @@
           "required": true
         },
         {
-          "title": "Toolset",
-          "name": "toolset",
+          "title": "Tools",
+          "name": "tools",
           "type": "list",
           "description": "List of skills, technologies, and tools you use.",
           "required": true
