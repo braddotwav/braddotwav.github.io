@@ -26,44 +26,38 @@
       "clearEmpty": true,
       "fields": [
         {
-          "title": "Title",
-          "name": "title",
+          "title": "Name",
+          "name": "name",
           "type": "string",
-          "description": "Profile username handle",
+          "description": "Your full name or preferred display name.",
           "required": true
         },
         {
           "title": "Avatar",
           "name": "avatar",
           "type": "image",
-          "description": "Display a profile image",
+          "description": "Profile image or avatar.",
           "required": true
         },
         {
           "title": "Description",
           "name": "description",
           "type": "string",
-          "description": "Enter a breif summary of what you do",
+          "description": "A brief summary about you.",
           "required": true
         },
         {
           "title": "Toolset",
           "name": "toolset",
           "type": "list",
-          "description": "Enter a list of your commonly used tools",
+          "description": "List of skills, technologies, and tools you use.",
           "required": true
         },
         {
           "title": "Socials",
           "name": "socials",
           "type": "list",
-          "description": "Display your socials",
-          "required": false
-        },
-        {
-          "title": "Resume",
-          "name": "resumeLink",
-          "type": "string",
+          "description": "Links to your social profiles.",
           "required": false
         }
       ]
@@ -74,26 +68,24 @@
       "clearEmpty": true,
       "fields": [
         {
-          "title": "Title",
-          "name": "title",
+          "title": "Name",
+          "name": "name",
           "type": "string",
-          "default": "Project title",
-          "description": "Enter the project's title",
+          "description": "Project name.",
           "required": true
         },
         {
           "title": "Description",
           "name": "description",
           "type": "string",
-          "default": "Project description",
-          "description": "Write a brief summary of what the project is about or what it does",
+          "description": "Brief project overview.",
           "required": true
         },
         {
           "title": "Category",
           "name": "category",
           "type": "choice",
-          "description": "What category does this project come under",
+          "description": "Project category.",
           "choices": [
             "software",
             "audio",
@@ -104,22 +96,22 @@
         {
           "title": "Image",
           "name": "image",
-          "description": "Provide a screenshot of the project",
+          "description": "Screenshot or visual of the project.",
           "type": "image",
           "required": true
         },
         {
-          "title": "Created With",
-          "name": "createdWith",
-          "description": "What was the project created with",
+          "title": "Tools",
+          "name": "tools",
+          "description": "Technologies and tools used.",
           "type": "list",
           "required": true
         },
         {
-          "title": "Link",
+          "title": "Links",
           "name": "links",
           "type": "list",
-          "description": "Provide any links connected to this project",
+          "description": "Relevant URLs.",
           "required": false
         }
       ]

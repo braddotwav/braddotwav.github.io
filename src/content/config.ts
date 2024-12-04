@@ -4,12 +4,11 @@ import { z, defineCollection } from 'astro:content';
 const profileCollection = defineCollection({
     type: 'content',
     schema: ({ image }) => z.object({
-        title: z.string(),
+        name: z.string(),
         avatar: image().required(),
         description: z.string(),
         tools: z.array(z.string()),
         socials: z.array(z.string()),
-        resumeLink: z.string().url().optional()
     }),
 });
 
@@ -17,7 +16,7 @@ const profileCollection = defineCollection({
 const projectCollection = defineCollection({
     type: 'content',
     schema: ({ image }) => z.object({
-        title: z.string(),
+        name: z.string(),
         description: z.string(),
         category: z.enum(['software', 'audio', 'other']),
         image: image().required(),
