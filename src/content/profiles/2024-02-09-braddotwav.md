@@ -1,7 +1,6 @@
 ---
 fmContentType: profile
 name: braddotwav
-avatar: /avatars/gizmo_avatar.webp
 description: Programmer & Music Maker
 tools:
     - C#
@@ -13,4 +12,5 @@ socials:
     - https://github.com/braddotwav
     - https://x.com/braddotwav
     - https://youtube.com/@braddotwav
+avatar: /avatars/braddotwav_avatar.webp
 ---
