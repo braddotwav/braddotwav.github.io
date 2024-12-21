@@ -16,6 +16,7 @@ import Link from '../components/Link.astro';
 // Import profile
 const profile = await getEntry('profiles', '2024-02-09-braddotwav');
 const metaDescription = `${profile.data.name} - ${profile.data.description}`
+const metaImage = new URL(profile.data.hero, profile.data.domain).toString();
 
 // Import projects
 const projects = await getCollection('projects');
@@ -30,7 +31,7 @@ const projects = await getCollection('projects');
 		<title>@{profile.data.name}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content={metaDescription}>
-        <meta name="image" content={profile.data.hero}>
+        <meta name="image" content={metaImage}>
         <meta name="author" content={profile.data.name}>
         
         <!-- Facebook Meta Tags -->
@@ -38,7 +39,7 @@ const projects = await getCollection('projects');
         <meta property="og:type" content="website">
         <meta property="og:title" content={profile.data.name}>
         <meta property="og:description" content={metaDescription}>
-        <meta property="og:image" content={profile.data.hero}>
+        <meta property="og:image" content={metaImage}>
 
         <link rel="icon" href={profile.data.avatar}>
     </head>
