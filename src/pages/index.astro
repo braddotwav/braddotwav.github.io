@@ -30,6 +30,8 @@ const projects = await getCollection('projects');
 		<meta name="generator" content={Astro.generator} />
 		<title>@{profile.data.name}</title>
         <meta name="description" content=`${profile.data.name} - ${profile.data.description}`>
+        <meta name="image" content={profile.data.hero}>
+        <meta name="author" content={profile.data.name}>
     </head>
     
     <body>

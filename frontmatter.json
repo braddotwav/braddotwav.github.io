@@ -40,6 +40,13 @@
           "required": true
         },
         {
+          "title": "Hero",
+          "name": "hero",
+          "type": "image",
+          "description": "A hero image that is used for SEO.",
+          "required": true
+        },
+        {
           "title": "Description",
           "name": "description",
           "type": "string",

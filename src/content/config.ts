@@ -6,6 +6,7 @@ const profileCollection = defineCollection({
     schema: ({ image }) => z.object({
         name: z.string(),
         avatar: image().required(),
+        hero: image().required(),
         description: z.string(),
         tools: z.array(z.string()),
         socials: z.array(z.string()),
