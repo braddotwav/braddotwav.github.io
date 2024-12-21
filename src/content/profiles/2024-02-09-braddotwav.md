@@ -14,4 +14,5 @@ socials:
     - https://youtube.com/@braddotwav
 avatar: /avatars/braddotwav_avatar.webp
 hero: /avatars/braddotwav_hero.webp
+domain: https://braddotwav.github.io/
 ---
