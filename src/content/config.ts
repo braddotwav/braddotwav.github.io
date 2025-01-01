@@ -10,7 +10,6 @@ const profileCollection = defineCollection({
         description: z.string(),
         tools: z.array(z.string()),
         socials: z.array(z.string()),
-        domain: z.string(),
     }),
 });
 

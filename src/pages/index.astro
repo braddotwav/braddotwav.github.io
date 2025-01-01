@@ -16,7 +16,7 @@ import Link from '../components/Link.astro';
 // Import profile
 const profile = await getEntry('profiles', '2024-02-09-braddotwav');
 const metaDescription = `${profile.data.name} - ${profile.data.description}`
-const metaImage = new URL(profile.data.hero, profile.data.domain).toString();
+const metaImage = new URL(profile.data.hero, Astro.site).toString();
 
 // Import projects
 const projects = await getCollection('projects');

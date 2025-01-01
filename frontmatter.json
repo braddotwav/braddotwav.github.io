@@ -66,13 +66,6 @@
           "type": "list",
           "description": "Links to your social profiles.",
           "required": false
-        },
-        {
-          "title": "Domain Url",
-          "name": "domain",
-          "type": "string",
-          "description": "The url to your domain",
-          "required": true
         }
       ]
     },
