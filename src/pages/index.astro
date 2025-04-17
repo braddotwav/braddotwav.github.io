@@ -8,15 +8,16 @@ import Button from '../components/Button.astro'
 import Badge from '../components/Badge.astro';
 import Project from '../components/Project.astro';
 import SocialButton from '../components/SocialButton.astro';
+import Link from '../components/Link.astro';
 
 // Astro Components
 import { getCollection, getEntry } from 'astro:content';
-import Link from '../components/Link.astro';
+import { Image } from 'astro:assets';
 
 // Import profile
-const profile = await getEntry('profiles', '2024-02-09-braddotwav');
+const profile = await getEntry('profiles', '2024-02-09-braddotwav')!;
 const metaDescription = `${profile.data.name} - ${profile.data.description}`
-const metaImage = new URL(profile.data.hero, Astro.site).toString();
+const metaImage = new URL(profile.data.hero.src, Astro.site).toString();
 
 // Import projects
 const projects = await getCollection('projects');
@@ -35,13 +36,13 @@ const projects = await getCollection('projects');
         <meta name="author" content={profile.data.name}>
         
         <!-- Facebook Meta Tags -->
-        <meta property="og:url" content={profile.data.domain}>
+        <meta property="og:url" content={Astro.url}>
         <meta property="og:type" content="website">
         <meta property="og:title" content={profile.data.name}>
         <meta property="og:description" content={metaDescription}>
         <meta property="og:image" content={metaImage}>
 
-        <link rel="icon" href={profile.data.avatar}>
+        <link rel="icon" href={profile.data.avatar.src}>
     </head>
     
     <body>
@@ -55,8 +56,8 @@ const projects = await getCollection('projects');
 
                 <!-- Profile Content -->
                 <div class="h-full flex flex-col items-center justify-center gap-6">
-                    <!-- Picture -->
-                    <img src={profile.data.avatar} alt=`${profile.data.name}-avatar` width="144" height="144" class="rounded-full"/>
+                    <!-- Avatar -->
+                    <Image src={profile.data.avatar} alt={profile.data.name} class={"rounded-full"} loading="eager"/>
                     
                     <!-- Intro -->
                     <div class="flex flex-col items-center gap-2 text-white">
@@ -79,9 +80,9 @@ const projects = await getCollection('projects');
             </section>
             
             <!-- Project Section -->
-            <section id="projects" class="container mx-auto">
+            <section id="projects" class="container mx-auto my-2">
                 <div class="flex flex-col gap-24 mb-24">
-                    {projects.map(entry => (
+                    {projects.map((entry) => (
 						<Project project={entry}/>
 					))}
                 </div>
