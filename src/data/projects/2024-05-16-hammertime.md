@@ -8,5 +8,5 @@ tools:
     - WPF
 links:
     - https://github.com/braddotwav/HammerTime
-image: /screenshots/hammertime.webp
+image: /src/data/projects/screenshots/hammertime.webp
 ---
