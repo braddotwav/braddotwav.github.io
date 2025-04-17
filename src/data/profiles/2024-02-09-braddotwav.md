@@ -12,6 +12,6 @@ socials:
     - https://github.com/braddotwav
     - https://x.com/braddotwav
     - https://youtube.com/@braddotwav
-avatar: /avatars/braddotwav_avatar.webp
-hero: /avatars/braddotwav_hero.webp
+avatar: /src/data/profiles/avatars/braddotwav_avatar.webp
+hero: /src/data/profiles/heros/braddotwav_hero.webp
 ---
