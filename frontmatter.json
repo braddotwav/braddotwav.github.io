@@ -2,21 +2,16 @@
   "$schema": "https://frontmatter.codes/frontmatter.schema.json",
   "frontMatter.framework.id": "astro",
   "frontMatter.preview.host": "http://localhost:4321",
-  "frontMatter.content.publicFolder": "public",
   "frontMatter.content.pageFolders": [
     {
       "title": "profiles",
-      "path": "[[workspace]]/src/content/profiles",
-      "contentTypes": [
-        "profile"
-      ]
+      "path": "[[workspace]]/src/data/profiles",
+      "contentTypes": ["profile"]
     },
     {
       "title": "projects",
-      "path": "[[workspace]]/src/content/projects",
-      "contentTypes": [
-        "project"
-      ]
+      "path": "[[workspace]]/src/data/projects",
+      "contentTypes": ["project"]
     }
   ],
   "frontMatter.taxonomy.contentTypes": [
@@ -95,8 +90,7 @@
           "description": "Project category.",
           "choices": [
             "software",
-            "audio",
-            "other"
+            "audio"
           ],
           "required": true
         },
