@@ -84,6 +84,15 @@
           "required": true
         },
         {
+          "title": "Date",
+          "name": "date",
+          "type": "datetime",
+          "default": "{{now}}",
+          "dateFormat": "yyyy-MM-dd",
+          "description": "Date of upload.",
+          "required": true
+        },
+        {
           "title": "Category",
           "name": "category",
           "type": "choice",

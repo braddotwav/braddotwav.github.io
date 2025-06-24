@@ -18,6 +18,7 @@ const projects = defineCollection({
     schema: ({ image }) => z.object({
         name: z.string(),
         description: z.string(),
+        date: z.date(),
         category: z.enum(['software', 'audio']),
         image: image(),
         tools: z.array(z.string()),
