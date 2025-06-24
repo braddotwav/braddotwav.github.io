@@ -38,9 +38,9 @@ function getButtonTitleFromUrl(url: string): string {
 }
 ---
 <!-- Project Content -->
-<div class="container mx-auto h-[25rem] grid grid-rows-1 grid-cols-1 lg:grid-cols-2 bg-primary-900/30 text-white">
+<div class="container mx-auto h-[25rem] grid grid-rows-1 grid-cols-1 xl:grid-cols-2 bg-primary-900/30 text-white">
     <!-- Image Container-->
-    <div class="hidden lg:block relative">
+    <div class="hidden xl:block relative">
         <Image src={project.data.image} alt={project.data.name} class={"absolute w-full h-full object-cover object-top"} />
     </div>
 
@@ -48,7 +48,7 @@ function getButtonTitleFromUrl(url: string): string {
     <div class="p-8">
         <div class="relative w-full h-full">
             <!-- Type & Tools -->
-            <div class="hidden lg:flex absolute right-0 gap-x-6 text-sm font-mono">
+            <div class="hidden xl:flex absolute right-0 gap-x-6 text-sm font-mono">
                 <p>TYPE: <span class="text-accent-300">{category}</span></p>
                 <p>TOOLS: <span class="text-accent-300">{tools}</span></p>
             </div>
