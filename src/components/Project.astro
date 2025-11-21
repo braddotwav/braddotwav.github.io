@@ -17,17 +17,27 @@ const category:string = project.data.category.toUpperCase();
 
 // Function to parse a url to get its name
 function getWebsiteName(url: string): string {
-    // Create a URL object from the input string
-    const parsedUrl = new URL(url);
+  try {
+          // Create a URL object
+          const parsedUrl = new URL(url);
 
-    // Extract the hostname (the domain of the URL)
-    const hostname = parsedUrl.hostname;
+          // Get the hostname (e.g., "braddotwav.itch.io" or "www.google.com")
+          const hostname = parsedUrl.hostname;
 
-    // Remove "www." if it exists, and split the hostname to get the domain
-    const domain = hostname.replace(/^www\./, '').split('.')[0];
+          // Split the hostname by periods into an array
+          const parts = hostname.split('.');
 
-    // Capitalize the first letter and return the result
-    return domain.charAt(0).toUpperCase() + domain.slice(1);
+          // Safety check: if there is only one part (e.g. localhost), return it
+          if (parts.length === 1) return parts[0];
+          const domain = parts[parts.length - 2];
+
+          // Capitalize and return
+          return domain.charAt(0).toUpperCase() + domain.slice(1);
+
+      } catch (error) {
+          // Fallback if the URL is invalid
+          return "Unknown";
+      }
 }
 
 // Function to get the relevant icon string from a URL
@@ -52,14 +62,14 @@ function getButtonTitleFromUrl(url: string): string {
                 <p>TYPE: <span class="text-accent-300">{category}</span></p>
                 <p>TOOLS: <span class="text-accent-300">{tools}</span></p>
             </div>
-      
+
             <!-- Main -->
             <div class="flex flex-col justify-center h-full gap-7">
                 <div class="flex flex-col gap-y-3">
                     <h1 class="font-semibold text-4xl">{project.data.name}</h1>
                     <p class="text-primary-300 text-lg">{project.data.description}</p>
                 </div>
-                
+
                 <div class="flex flex-row gap-6">
                     {project.data.links ? project.data.links.map((link: string) => (
                         <Button title={getButtonTitleFromUrl(link)} href={link}></Button>
