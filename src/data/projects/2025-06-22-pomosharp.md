@@ -1,5 +1,4 @@
 ---
-fmContentType: project
 name: PomoSharp
 description: PomoSharp is a Pomodoro timer designed to boost focus and productivity. It features customizable durations, daily streak tracking, and detailed usage stats.
 category: software
