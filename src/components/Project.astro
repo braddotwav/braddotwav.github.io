@@ -70,7 +70,7 @@ function getButtonTitleFromUrl(url: string): string {
                     <p class="text-primary-300 text-lg">{project.data.description}</p>
                 </div>
 
-                <div class="flex flex-row gap-6">
+                <div class="flex flex-row gap-3">
                     {project.data.links ? project.data.links.map((link: string) => (
                         <Button title={getButtonTitleFromUrl(link)} href={link}></Button>
                     )) : ''}
