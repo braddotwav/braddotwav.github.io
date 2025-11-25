@@ -1,5 +1,4 @@
 ---
-fmContentType: profile
 name: braddotwav
 description: Programmer & Music Maker
 tools:
