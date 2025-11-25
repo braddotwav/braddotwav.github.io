@@ -1,6 +1,6 @@
 ---
 name: Time Heist
-description: Time Heist is a game I created with a friend in just two days for Unity's 20th Anniversary Game Jam. Although it was our first ever jam, we ranked 40th overall and 14th for Art out of 437 entries. We are incredibly proud of what we achieved in such a short timeframe.
+description: Time Heist was built in just 48 hours for the Unity 20th Anniversary Game Jam. For our first-ever jam, we are proud of what we achieved in the limited time.
 category: game
 image: /src/data/projects/screenshots/timeheist.webp
 tools:
@@ -8,5 +8,6 @@ tools:
     - UNITY
 links:
     - https://braddotwav.itch.io/time-heist
+    - https://www.youtube.com/watch?v=d7ZPXdLoezg
 date: 2025-11-21
 ---
