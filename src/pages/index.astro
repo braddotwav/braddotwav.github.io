@@ -59,7 +59,7 @@ const sortedProjects = projects.sort((a, b) => b.data.date.getTime() - a.data.da
                 <div class="h-full flex flex-col items-center justify-center gap-6">
                     <!-- Avatar -->
                      <div class="w-32">
-                         <Image src={profile.data.avatar} alt={profile.data.name} class={"rounded-full"} loading="eager"/>
+                         <Image src={profile.data.avatar} alt={profile.data.name} class={"rounded-full"} loading="eager" fetchpriority="high"/>
                      </div>
                     
                     <!-- Intro -->
