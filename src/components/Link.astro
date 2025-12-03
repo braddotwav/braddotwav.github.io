@@ -10,5 +10,5 @@ const { href, newTab = false} = Astro.props;
 const target:string = newTab ? '_blank' : '_self';
 ---
 <a aria-label="link" href={href} target={target} class="w-fit">
-<slot/>
+  <slot/>
 </a>

@@ -30,11 +30,11 @@ function getIconStringFromUrl(url: string) {
             return iconString;
         }
     }
-    
+
     // If no matching pattern is found, return default icon string
     return 'bi:link-45deg';
 }
 ---
 <Link href={href} newTab={newTab}>
-    <Icon name={getIconStringFromUrl(href)} size={size} class:list={"text-primary-400 hover:text-accent-400"}/>
+  <Icon name={getIconStringFromUrl(href)} size={size} class:list={"text-primary-400 hover:text-accent-400"}/>
 </Link>

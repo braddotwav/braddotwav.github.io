@@ -1,5 +1,4 @@
 ---
-
 // General CSS
 import '../style/general.css'
 
@@ -15,7 +14,7 @@ import { getCollection, getEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 
 // Import profile
-const profile = await getEntry('profiles', '2024-02-09-braddotwav')!;
+const profile = await getEntry('profiles', '2024-02-09-braddotwav');
 const metaDescription = `${profile.data.name} - ${profile.data.description}`
 const metaImage = new URL(profile.data.hero.src, Astro.site).toString();
 
@@ -26,16 +25,16 @@ const sortedProjects = projects.sort((a, b) => b.data.date.getTime() - a.data.da
 ---
 <!DOCTYPE html>
 <html lang="en">
-    
+
     <head>
         <!-- Meta Tags -->
         <meta charset="UTF-8">
-		<title>@{profile.data.name}</title>
+        <title>@{profile.data.name}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content={metaDescription}>
         <meta name="image" content={metaImage}>
         <meta name="author" content={profile.data.name}>
-        
+
         <!-- Facebook Meta Tags -->
         <meta property="og:url" content={Astro.url}>
         <meta property="og:type" content="website">
@@ -45,7 +44,7 @@ const sortedProjects = projects.sort((a, b) => b.data.date.getTime() - a.data.da
 
         <link rel="icon" href={profile.data.avatar.src}>
     </head>
-    
+
     <body>
         <main>
             <!-- Profile Section -->
@@ -58,16 +57,14 @@ const sortedProjects = projects.sort((a, b) => b.data.date.getTime() - a.data.da
                 <!-- Profile Content -->
                 <div class="h-full flex flex-col items-center justify-center gap-6">
                     <!-- Avatar -->
-                     <div class="w-32">
-                         <Image src={profile.data.avatar} alt={profile.data.name} class={"rounded-full"} loading="eager" fetchpriority="high"/>
-                     </div>
-                    
+                    <Image src={profile.data.avatar} alt={profile.data.name} width="128" height="128" class='rounded-full' loading='eager' />
+
                     <!-- Intro -->
                     <div class="flex flex-col items-center gap-2 text-white">
                         <h2 class="font-semibold text-3xl">{profile.data.name}</h2>
                         <p class="text-primary-300">{profile.data.description}</p>
                     </div>
-                        
+
                     <!-- Tools -->
                     <div class="flex flex-col items-center gap-2 w-fit p-4">
                         <h3 class="font-mono self-center text-primary-300">TOOLSET:</h3>
@@ -81,7 +78,7 @@ const sortedProjects = projects.sort((a, b) => b.data.date.getTime() - a.data.da
                     </div>
                 </div>
             </section>
-            
+
             <!-- Project Section -->
             <section id="projects" class="container mx-auto my-2">
                 <div class="flex flex-col gap-24 mb-24">
@@ -98,7 +95,7 @@ const sortedProjects = projects.sort((a, b) => b.data.date.getTime() - a.data.da
                     <Link href='#profile'>
                         <span class="text-sm font-mono self-center text-primary-300 hover:text-accent-400">BACK TO TOP</span>
                     </Link>
-                    
+
                     <!-- Socials -->
                     <div class="flex flex-row gap-6 justify-end">
                         <p class="text-sm font-mono self-center text-primary-300">SOCIALS:</p>
@@ -115,27 +112,27 @@ const sortedProjects = projects.sort((a, b) => b.data.date.getTime() - a.data.da
 </html>
 
 <script>
-const projectBtn = document.getElementById('projectBtn');
-const projectSection = document.getElementById('projects');
+  const projectBtn = document.getElementById('projectBtn');
+  const projectSection = document.getElementById('projects');
 
-function handleProjectScroll() {
-    if (!projectBtn || !projectSection) return;
+  function handleProjectScroll() {
+      if (!projectBtn || !projectSection) return;
 
-    const sectionTop = projectSection.offsetTop;
-    const scrollPosition = window.scrollY;
+      const sectionTop = projectSection.offsetTop;
+      const scrollPosition = window.scrollY;
 
-    const distance = sectionTop - scrollPosition;
-    
-    if (distance <= 0) {
-        projectBtn.style.opacity = '0';
-        projectBtn.style.visibility = 'hidden';
-    }
-    else {
-        const opacity = distance / sectionTop;
-        projectBtn.style.opacity = opacity.toString();
-        projectBtn.style.visibility = 'visible';
-    }
-}
+      const distance = sectionTop - scrollPosition;
 
-window.addEventListener('scroll', handleProjectScroll)
+      if (distance <= 0) {
+          projectBtn.style.opacity = '0';
+          projectBtn.style.visibility = 'hidden';
+      }
+      else {
+          const opacity = distance / sectionTop;
+          projectBtn.style.opacity = opacity.toString();
+          projectBtn.style.visibility = 'visible';
+      }
+  }
+
+  window.addEventListener('scroll', handleProjectScroll)
 </script>
