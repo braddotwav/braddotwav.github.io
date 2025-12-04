@@ -57,9 +57,7 @@ const sortedProjects = projects.sort((a, b) => b.data.date.getTime() - a.data.da
                 <!-- Profile Content -->
                 <div class="h-full flex flex-col items-center justify-center gap-6">
                     <!-- Avatar -->
-                    <div class="w-32 max-w-32">
-                      <Image src={profile.data.avatar} alt={profile.data.name} width="128" height="128" priority={true} class='rounded-full' loading='eager' />
-                    </div>
+                    <Image src={profile.data.avatar} alt={profile.data.name} width="128" height="128" priority={true} class='max-w-32 w-32 rounded-full' loading='eager' />
 
                     <!-- Intro -->
                     <div class="flex flex-col items-center gap-2 text-white">
