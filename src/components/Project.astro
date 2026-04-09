@@ -48,33 +48,31 @@ function getButtonTitleFromUrl(url: string): string {
 }
 ---
 <!-- Project Content -->
-<div class="container mx-auto h-[25rem] grid grid-rows-1 grid-cols-1 xl:grid-cols-2 bg-primary-900/30 text-white">
+<div class="container px-8 py-8 mx-auto h-100 sm:px-0 xl:h-115 grid grid-rows-1 grid-cols-1 gap-x-9 xl:grid-cols-2 text-primary">
     <!-- Image Container-->
     <div class="hidden xl:block relative">
-        <Image src={project.data.image} alt={project.data.name} class={"absolute w-full h-full object-cover object-top"} />
+        <Image src={project.data.image as ImageMetadata} alt={project.data.name} class={"w-full rounded-3xl h-full object-cover object-top"} />
     </div>
 
     <!-- Infomation Container -->
-    <div class="p-8">
-        <div class="relative w-full h-full">
-            <!-- Type & Tools -->
-            <div class="hidden xl:flex absolute right-0 gap-x-6 text-sm font-mono">
-                <p>TYPE: <span class="text-accent-300">{category}</span></p>
-                <p>TOOLS: <span class="text-accent-300">{tools}</span></p>
+    <div class="relative w-full h-full">
+        <!-- Type & Tools -->
+        <div class="hidden xl:flex absolute right-0 gap-x-6 text-sm font-mono text-secondary">
+            <p>TYPE: <span class="text-accent">{category}</span></p>
+            <p>TOOLS: <span class="text-accent">{tools}</span></p>
+        </div>
+
+        <!-- Main -->
+        <div class="flex flex-col justify-center h-full gap-7">
+            <div class="flex flex-col gap-y-3">
+                <h1 class="text-primary font-semibold text-4xl">{project.data.name}</h1>
+                <p class="text-secondary text-lg">{project.data.description}</p>
             </div>
 
-            <!-- Main -->
-            <div class="flex flex-col justify-center h-full gap-7">
-                <div class="flex flex-col gap-y-3">
-                    <h1 class="font-semibold text-4xl">{project.data.name}</h1>
-                    <p class="text-primary-300 text-lg">{project.data.description}</p>
-                </div>
-
-                <div class="flex flex-row gap-3">
-                    {project.data.links ? project.data.links.map((link: string) => (
-                        <Button title={getButtonTitleFromUrl(link)} href={link}></Button>
-                    )) : ''}
-                </div>
+            <div class="flex flex-row gap-3">
+                {project.data.links ? project.data.links.map((link: string) => (
+                    <Button title={getButtonTitleFromUrl(link)} href={link}></Button>
+                )) : ''}
             </div>
         </div>
     </div>

@@ -1,6 +1,5 @@
 ---
-// General CSS
-import '../style/general.css'
+import DefaultLayout from '../layouts/DefaultLayout.astro';
 
 // Components
 import Button from '../components/Button.astro'
@@ -15,103 +14,76 @@ import { Image } from 'astro:assets';
 
 // Import profile
 const profile = await getEntry('profiles', '2024-02-09-braddotwav');
-const metaDescription = `${profile.data.name} - ${profile.data.description}`
-const metaImage = new URL(profile.data.hero.src, Astro.site).toString();
 
 // Import projects
 const projects = await getCollection('projects');
-
 const sortedProjects = projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
-<!DOCTYPE html>
-<html lang="en">
+<DefaultLayout title=`@${profile.data.name}`>
+    <main>
+        <!-- Profile Section -->
+        <section id="profile" class="h-screen">
+            <!-- Project Button -->
+            <div id="projectBtn" class="fixed right-1 p-5">
+                <Button title=`Projects (${projects.length})` href='#projects'/>
+            </div>
 
-    <head>
-        <!-- Meta Tags -->
-        <meta charset="UTF-8">
-        <title>@{profile.data.name}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content={metaDescription}>
-        <meta name="image" content={metaImage}>
-        <meta name="author" content={profile.data.name}>
-
-        <!-- Facebook Meta Tags -->
-        <meta property="og:url" content={Astro.url}>
-        <meta property="og:type" content="website">
-        <meta property="og:title" content={profile.data.name}>
-        <meta property="og:description" content={metaDescription}>
-        <meta property="og:image" content={metaImage}>
-
-        <link rel="icon" href={profile.data.avatar.src}>
-    </head>
-
-    <body>
-        <main>
-            <!-- Profile Section -->
-            <section id="profile" class="h-screen">
-                <!-- Project Button -->
-                <div id="projectBtn" class="fixed right-1 p-5 z-10">
-                    <Button title=`Projects (${projects.length})` href='#projects'/>
+            <!-- Profile Content -->
+            <div class="h-full flex flex-col items-center justify-center gap-6">
+                <!-- Avatar -->
+                <div class="w-32 max-w-32">
+                    <Image src={profile.data.avatar as ImageMetadata} alt={profile.data.name} width="128" height="128" priority={true} class='rounded-full' loading='eager' />
                 </div>
 
-                <!-- Profile Content -->
-                <div class="h-full flex flex-col items-center justify-center gap-6">
-                    <!-- Avatar -->
-                    <div class="w-32 max-w-32">
-                      <Image src={profile.data.avatar} alt={profile.data.name} width="128" height="128" priority={true} class='rounded-full' loading='eager' />
-                    </div>
+                <!-- Intro -->
+                <div class="flex flex-col items-center gap-2">
+                    <h2 class="text-primary font-semibold text-3xl">{profile.data.name}</h2>
+                    <p class="text-secondary">{profile.data.description}</p>
+                </div>
 
-                    <!-- Intro -->
-                    <div class="flex flex-col items-center gap-2 text-white">
-                        <h2 class="font-semibold text-3xl">{profile.data.name}</h2>
-                        <p class="text-primary-300">{profile.data.description}</p>
-                    </div>
-
-                    <!-- Tools -->
-                    <div class="flex flex-col items-center gap-2 w-fit p-4">
-                        <h3 class="font-mono self-center text-primary-300">TOOLSET:</h3>
-                        <div class="flex flex-row flex-wrap gap-3 mx-12">
-                            {profile.data.tools.map((toolset: string) => (
-                                <Badge>
-                                    <p>{toolset.toUpperCase()}</p>
-                                </Badge>
-                            ))}
-                        </div>
+                <!-- Tools -->
+                <div class="flex flex-col items-center gap-2 w-fit p-4">
+                    <h3 class="text-secondary font-mono self-center">TOOLSET:</h3>
+                    <div class="flex flex-row flex-wrap gap-3 mx-12">
+                        {profile.data.tools.map((toolset: string) => (
+                            <Badge>
+                                <p>{toolset.toUpperCase()}</p>
+                            </Badge>
+                        ))}
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Project Section -->
-            <section id="projects" class="container mx-auto my-2">
-                <div class="flex flex-col gap-24 mb-24">
-                    {sortedProjects.map((entry) => (
-						<Project project={entry}/>
-					))}
+        <!-- Project Section -->
+        <section id="projects" class="flex flex-col">
+                {sortedProjects.map((entry) => (
+                <div class="border-b border-border-primary">
+				<Project project={entry}/>
                 </div>
-            </section>
+			))}
+            </div>
+        </section>
 
-            <!-- Footer -->
-            <footer class="bg-black text-white p-12">
-                <div class="container mx-auto flex flex-col gap-6 sm:flex-row justify-center sm:justify-between items-center">
-                    <!-- Back to top -->
-                    <Link href='#profile'>
-                        <span class="text-sm font-mono self-center text-primary-300 hover:text-accent-400">BACK TO TOP</span>
-                    </Link>
+        <!-- Footer -->
+        <footer class="bg-[#08090a] text-white py-12">
+            <div class="container mx-auto flex flex-col gap-6 sm:flex-row justify-center sm:justify-between items-center">
+                <!-- Back to top -->
+                <Link href='#profile'>
+                    <span class="text-sm font-mono self-center text-primary-300 hover:text-accent">BACK TO TOP</span>
+                </Link>
 
-                    <!-- Socials -->
-                    <div class="flex flex-row gap-6 justify-end">
-                        <p class="text-sm font-mono self-center text-primary-300">SOCIALS:</p>
-                        {profile.data.socials ? profile.data.socials.map((social: string) => (
-                            <SocialButton href={social}/>
-                        )) : ''}
-                    </div>
+                <!-- Socials -->
+                <div class="flex flex-row gap-6 justify-end">
+                    <p class="text-sm font-mono self-center text-primary-300">SOCIALS:</p>
+                    {profile.data.socials ? profile.data.socials.map((social: string) => (
+                        <SocialButton href={social}/>
+                    )) : ''}
                 </div>
-            </footer>
-
-        </main>
-    </body>
-
-</html>
+            </div>
+        </footer>
+    </main>
+</DefaultLayout>
 
 <script>
   const projectBtn = document.getElementById('projectBtn');
@@ -136,5 +108,5 @@ const sortedProjects = projects.sort((a, b) => b.data.date.getTime() - a.data.da
       }
   }
 
-  window.addEventListener('scroll', handleProjectScroll)
+  window.addEventListener('scroll', handleProjectScroll);
 </script>

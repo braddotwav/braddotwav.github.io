@@ -1,3 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Onest";
+  --font-mono: "JetBrains Mono";
+
+  --color-background: #0f1011;
+  --color-accent: #27a644;
+  --color-border-primary: #23252a;
+  --color-primary: var(--color-zinc-100);
+  --color-secondary: var(--color-zinc-400);
+}
+
 @font-face {
   font-family: "Onest";
   font-style: normal;
@@ -28,5 +41,5 @@ html {
 }
 
 body {
-  background: #121212;
+  background-color: var(--color-background);
 }

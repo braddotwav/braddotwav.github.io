@@ -9,8 +9,8 @@ interface Props{
 const {title, href } = Astro.props;
 
 ---
-<Link href={href}>
-  <button tabindex="-1" class="bg-accent-100 text-accent-400 py-3 px-5 rounded-md">
+<Link href={href}}>
+  <button tabindex="-1" class="block bg-accent/10 text-accent py-3 px-5 rounded-md pointer-events-none">
     {title}
   </button>
 </Link>

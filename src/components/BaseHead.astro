@@ -1,0 +1,20 @@
+---
+// Astro
+import { getEntry } from 'astro:content'
+
+// Import profile
+const profile = await getEntry('profiles', '2024-02-09-braddotwav');
+const metaDescription = `${profile.data.name} - ${profile.data.description}`
+const metaImage = new URL(profile.data.hero.src, Astro.site).toString();
+---
+
+<meta name="description" content={metaDescription}>
+<meta name="image" content={metaImage}>
+<meta name="author" content={profile.data.name}>
+<meta property="og:url" content={Astro.url}>
+<meta property="og:type" content="website">
+<meta property="og:title" content={profile.data.name}>
+<meta property="og:description" content={metaDescription}>
+<meta property="og:image" content={metaImage}>
+
+<link rel="icon" href={profile.data.avatar.src}>
