@@ -6,6 +6,7 @@ const profiles = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/data/profiles" }),
   schema: ({ image }) =>
     z.object({
+      handle: z.string(),
       name: z.string(),
       avatar: image(),
       hero: image(),
