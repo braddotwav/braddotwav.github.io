@@ -3,13 +3,23 @@
 import '../styles/global.css'
 import BaseHead from '../components/BaseHead.astro'
 
-const { title } = Astro.props;
+interface Props {
+  title: string,
+  description: string
+}
+
+const { title, description} = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content={description}>
+        <meta property="og:description" content={description}>
+        <meta property="og:title" content={title}>
+        <meta name="twitter:title" content={title}>
+        <meta name="twitter:description" content={description}>
         <title>{title}</title>
         <BaseHead />
     </head>

@@ -1,44 +1,17 @@
 ---
-// Import astro icon component
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 import Button from './Button.astro';
+import { getWebsiteName } from '../utils/url';
 
-// Create interface
 interface Props{
     project: CollectionEntry<'projects'>;
 }
 
 const { project } = Astro.props;
 
-// Combine all the tools into one string
 const tools:string = project.data.tools.join(', ').toUpperCase();
 const category:string = project.data.category.toUpperCase();
-
-// Function to parse a url to get its name
-function getWebsiteName(url: string): string {
-  try {
-          // Create a URL object
-          const parsedUrl = new URL(url);
-
-          // Get the hostname (e.g., "braddotwav.itch.io" or "www.google.com")
-          const hostname = parsedUrl.hostname;
-
-          // Split the hostname by periods into an array
-          const parts = hostname.split('.');
-
-          // Safety check: if there is only one part (e.g. localhost), return it
-          if (parts.length === 1) return parts[0];
-          const domain = parts[parts.length - 2];
-
-          // Capitalize and return
-          return domain.charAt(0).toUpperCase() + domain.slice(1);
-
-      } catch (error) {
-          // Fallback if the URL is invalid
-          return "Unknown";
-      }
-}
 
 // Function to get the relevant icon string from a URL
 function getButtonTitleFromUrl(url: string): string {
@@ -48,14 +21,13 @@ function getButtonTitleFromUrl(url: string): string {
 }
 ---
 <!-- Project Content -->
-<div class="container px-8 py-8 mx-auto h-100 sm:px-0 xl:h-115 grid grid-rows-1 grid-cols-1 gap-x-9 xl:grid-cols-2 text-primary">
+<div class="relative px-8 py-8 h-100 sm:px-0 xl:h-115 grid grid-rows-1 grid-cols-1 gap-x-9 xl:grid-cols-2 text-primary">
     <!-- Image Container-->
-    <div class="hidden xl:block relative">
-        <Image src={project.data.image as ImageMetadata} alt={project.data.name} class={"w-full rounded-3xl h-full object-cover object-top"} />
-    </div>
+    <Image src={project.data.image as ImageMetadata} alt={project.data.name} class={"absolute object-cover xl:relative w-full h-full xl:rounded-3xl xl:object-cover xl:object-top xl:opacity-100 opacity-50"} />
+    <div class="absolute inset-0 bg-linear-to-t from-zinc-950 from-35% to-transparent xl:hidden"></div>
 
     <!-- Infomation Container -->
-    <div class="relative w-full h-full">
+    <div class="container mx-auto relative w-full h-full">
         <!-- Type & Tools -->
         <div class="hidden xl:flex absolute right-0 gap-x-6 text-sm font-mono text-secondary">
             <p>TYPE: <span class="text-accent">{category}</span></p>
@@ -71,8 +43,10 @@ function getButtonTitleFromUrl(url: string): string {
 
             <div class="flex flex-row gap-3">
                 {project.data.links ? project.data.links.map((link: string) => (
-                    <Button title={getButtonTitleFromUrl(link)} href={link}></Button>
-                )) : ''}
+                    <Button href={link} label={`View ${project.data.name} ${getWebsiteName(link)}`}>
+                        {getButtonTitleFromUrl(link)}
+                    </Button>
+                )) : undefined}
             </div>
         </div>
     </div>

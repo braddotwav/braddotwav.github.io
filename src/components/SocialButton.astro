@@ -1,32 +1,31 @@
 ---
-// Import astro icon component
 import { Icon } from 'astro-icon/components';
-import Link from './Link.astro';
+import { getWebsiteName } from '../utils/url';
 
-interface Props{
+interface Props {
     href: string
     size?: number
-    newTab?: boolean
 }
 
-const { href, size = 24, newTab = false } = Astro.props;
+const { href, size = 24 } = Astro.props;
 
 // Define a dictionary to store URL to icon string mappings
 const urlIconMap: { [key: string]: string } = {
-    'github.com': 'bi:github',
-    'twitter.com': 'bi:twitter-x',
-    'x.com': 'bi:twitter-x',
-    'spotify.com': 'bi:spotify',
-    'facebook.com': 'bi:facebook',
-    'soundcloud.com': 'bi:soundwave',
-    'youtube.com': 'bi:youtube'
+    'Github': 'bi:github',
+    'Instagram': 'bi:instagram',
+    'X': 'bi:twitter-x',
+    'Spotify': 'bi:spotify',
+    'Facebook': 'bi:facebook',
+    'Soundcloud': 'bi:soundwave',
+    'Youtube': 'bi:youtube'
 };
 
 // Function to get the relevant icon string from a URL
 function getIconStringFromUrl(url: string) {
-    // Iterate through each URL pattern in the map
+    const domainName = getWebsiteName(url);
+
     for (const [pattern, iconString] of Object.entries(urlIconMap)) {
-        if (url.includes(pattern)) {
+        if (domainName.includes(pattern)) {
             return iconString;
         }
     }
@@ -34,7 +33,8 @@ function getIconStringFromUrl(url: string) {
     // If no matching pattern is found, return default icon string
     return 'bi:link-45deg';
 }
+
 ---
-<Link href={href} newTab={newTab}>
-  <Icon name={getIconStringFromUrl(href)} size={size} class:list={"text-primary-400 hover:text-accent"}/>
-</Link>
+<a href={href} aria-label={`braddotwav on ${getWebsiteName(href)}`} rel="noopener" target="_blank">
+    <Icon name={getIconStringFromUrl(href)} size={size} class:list={"text-secondary transition-colors duration-200 hover:text-accent"} aria-hidden="true" focusable="false" />
+</a>

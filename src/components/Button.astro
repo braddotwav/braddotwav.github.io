@@ -1,16 +1,25 @@
 ---
-import Link from './Link.astro'
+import { Icon } from 'astro-icon/components';
 
-interface Props{
-    title: string,
+interface Props {
     href: string,
+    label?: string,
 }
 
-const {title, href } = Astro.props;
+const {href, label} = Astro.props;
 
+const isRedirect = href?.startsWith('https');
 ---
-<Link href={href}}>
-  <button tabindex="-1" class="block bg-accent/10 text-accent py-3 px-5 rounded-md pointer-events-none">
-    {title}
-  </button>
-</Link>
+<a href={href} target={isRedirect ? '_blank' : '_self'} rel={isRedirect ? 'noopener noreferrer' : undefined} aria-label={label != '' ? label : undefined} class="inline-flex items-stretch overflow-hidden bg-accent/10 text-accent rounded-md">
+    <span class="inline-flex items-center gap-2 px-5 py-3">
+        <slot />
+    </span>
+
+    {
+        isRedirect && (
+            <span aria-hidden="true" class:list={['flex items-center px-3 bg-accent/5']}>
+                <Icon name="bi:box-arrow-in-up-right" size=22 />
+            </span>
+        )
+    }
+</a>

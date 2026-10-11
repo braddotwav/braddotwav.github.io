@@ -2,11 +2,10 @@
 import DefaultLayout from '../layouts/DefaultLayout.astro';
 
 // Components
-import Button from '../components/Button.astro'
 import Badge from '../components/Badge.astro';
 import Project from '../components/Project.astro';
 import SocialButton from '../components/SocialButton.astro';
-import Link from '../components/Link.astro';
+import { toRoman } from '../utils/date';
 
 // Astro Components
 import { getCollection, getEntry } from 'astro:content';
@@ -18,33 +17,44 @@ const profile = await getEntry('profiles', '2024-02-09-braddotwav');
 // Import projects
 const projects = await getCollection('projects');
 const sortedProjects = projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const currentDate = new Date();
+const yearInRoman = toRoman(currentDate.getFullYear());
+
+const lastUpdatedDate = new Intl.DateTimeFormat('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+}).format(currentDate);
 ---
-<DefaultLayout title=`@${profile.data.name}`>
+<DefaultLayout
+    title={profile.data.name}
+    description='Portfolio of braddotwav, a UK-based programmer and music maker. Explore published games, software and tools, and find links to socials.'>
+    <!-- Main Content -->
     <main>
         <!-- Profile Section -->
-        <section id="profile" class="h-screen">
-            <!-- Project Button -->
-            <div id="projectBtn" class="fixed right-1 p-5">
-                <Button title=`Projects (${projects.length})` href='#projects'/>
-            </div>
+        <section id="profile" class="relative isolate min-h-dvh flex flex-col">
 
-            <!-- Profile Content -->
-            <div class="h-full flex flex-col items-center justify-center gap-6">
+            <!-- Radial Gradient -->
+            <div class="pointer-events-none -z-1 absolute inset-0 bg-no-repeat bg-radial-[closest-side_circle_at_50%_50%] from-zinc-500/5 to-background to-100%"></div>
+
+            <!-- Profile Content (centred in the remaining space) -->
+            <div class="flex-1 flex flex-col items-center justify-center gap-6 py-16">
                 <!-- Avatar -->
-                <div class="w-32 max-w-32">
-                    <Image src={profile.data.avatar as ImageMetadata} alt={profile.data.name} width="128" height="128" priority={true} class='rounded-full' loading='eager' />
+                <div class="max-w-32">
+                    <Image src={profile.data.avatar as ImageMetadata} alt={profile.data.name} class="rounded-full" loading='eager' fetchpriority='high' />
                 </div>
 
                 <!-- Intro -->
-                <div class="flex flex-col items-center gap-2">
-                    <h2 class="text-primary font-semibold text-3xl">{profile.data.name}</h2>
+                <div class="flex flex-col items-center gap-1">
+                    <h1 class="text-primary font-semibold text-3xl">{profile.data.name}</h1>
                     <p class="text-secondary">{profile.data.description}</p>
                 </div>
 
                 <!-- Tools -->
-                <div class="flex flex-col items-center gap-2 w-fit p-4">
-                    <h3 class="text-secondary font-mono self-center">TOOLSET:</h3>
-                    <div class="flex flex-row flex-wrap gap-3 mx-12">
+                <div class="flex flex-col items-center gap-3 w-fit p-4">
+                    <h2 class="text-secondary font-mono self-center">TOOLSET</h2>
+                    <div class="flex flex-row flex-wrap justify-center gap-3 mx-4 sm:mx-12">
                         {profile.data.tools.map((toolset: string) => (
                             <Badge>
                                 <p>{toolset.toUpperCase()}</p>
@@ -53,59 +63,38 @@ const sortedProjects = projects.sort((a, b) => b.data.date.getTime() - a.data.da
                     </div>
                 </div>
             </div>
+
+            <!-- Socials (pinned to the bottom) -->
+            {profile.data.socials && (
+                <div class="flex flex-col items-center gap-3">
+                    <h2 class="text-secondary font-mono self-center">SOCIALS</h2>
+                    <nav class="flex flex-row flex-wrap justify-center gap-6 px-4 sm:px-12 pb-8" aria-label="Social Navigation">
+                        {profile.data.socials.map((social: string) => (
+                            <SocialButton href={social} />
+                        ))}
+                    </nav>
+                </div>
+            )}
         </section>
 
         <!-- Project Section -->
-        <section id="projects" class="flex flex-col">
+        <section id="projects" class="xl:container mx-auto flex flex-col">
+            <!-- Blueprint Pattern -->
                 {sortedProjects.map((entry) => (
-                <div class="border-b border-border-primary">
-				<Project project={entry}/>
-                </div>
+                <Project project={entry}/>
 			))}
         </section>
-
-        <!-- Footer -->
-        <footer class="bg-[#08090a] text-white py-12">
-            <div class="container mx-auto flex flex-col gap-6 sm:flex-row justify-center sm:justify-between items-center">
-                <!-- Back to top -->
-                <Link href='#profile'>
-                    <span class="text-sm font-mono self-center text-primary-300 hover:text-accent">BACK TO TOP</span>
-                </Link>
-
-                <!-- Socials -->
-                <div class="flex flex-row gap-6 justify-end">
-                    <p class="text-sm font-mono self-center text-primary-300">SOCIALS:</p>
-                    {profile.data.socials ? profile.data.socials.map((social: string) => (
-                        <SocialButton href={social}/>
-                    )) : ''}
-                </div>
-            </div>
-        </footer>
     </main>
+
+    <!-- Footer -->
+    <footer class="container mx-auto flex flex-col gap-y-4 justify-center items-center text-secondary font-mono text-sm py-12">
+        <div class="inline-flex items-center gap-2">
+            <span class="relative flex size-2.5" aria-hidden="true">
+                <span class="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-75" />
+                <span class="relative inline-flex size-2.5 rounded-full bg-accent" />
+            </span>
+            <p>Last compiled: {lastUpdatedDate}</p>
+        </div>
+        <p>&copy; {yearInRoman} {profile.data.name}</p>
+    </footer>
 </DefaultLayout>
-
-<script>
-  const projectBtn = document.getElementById('projectBtn');
-  const projectSection = document.getElementById('projects');
-
-  function handleProjectScroll() {
-      if (!projectBtn || !projectSection) return;
-
-      const sectionTop = projectSection.offsetTop;
-      const scrollPosition = window.scrollY;
-
-      const distance = sectionTop - scrollPosition;
-
-      if (distance <= 0) {
-          projectBtn.style.opacity = '0';
-          projectBtn.style.visibility = 'hidden';
-      }
-      else {
-          const opacity = distance / sectionTop;
-          projectBtn.style.opacity = opacity.toString();
-          projectBtn.style.visibility = 'visible';
-      }
-  }
-
-  window.addEventListener('scroll', handleProjectScroll);
-</script>
