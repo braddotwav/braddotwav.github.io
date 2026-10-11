@@ -1,18 +1,17 @@
 import { defineCollection } from "astro:content";
-import { z } from "astro/zod"
+import { z } from "astro/zod";
 import { glob } from "astro/loaders";
 
 const profiles = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/data/profiles" }),
   schema: ({ image }) =>
     z.object({
-      handle: z.string(),
       name: z.string(),
       avatar: image(),
       hero: image(),
       description: z.string(),
       tools: z.array(z.string()),
-      socials: z.array(z.url()),
+      socials: z.array(z.string()),
     }),
 });
 
@@ -26,7 +25,7 @@ const projects = defineCollection({
       category: z.enum(["software", "audio", "game"]),
       image: image(),
       tools: z.array(z.string()),
-      links: z.array(z.url()),
+      links: z.array(z.string()),
     }),
 });
 
